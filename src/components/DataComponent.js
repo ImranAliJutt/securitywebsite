@@ -23,6 +23,7 @@ const DataComponent = () => {
     <div>
       <h1>Welcome to Security Website</h1>
       <h2>Fetched Data</h2>
+      <p>Here is the data fetched from the backend:</p>
       <ul>
         {data.map((item) => (
           <li key={item.id}>
