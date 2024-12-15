@@ -17,7 +17,7 @@ app.get("/api/data", (req, res) => {
     res.json([
         { id: 1, name: "Alice", role: "developer" },
         { id: 2, name: "Bob", role: "designer" },
-        { id: 3, name: "Charlie", role: "manager" },
+        { id: 3, name: "Imran Ranjha", role: "manager" },
     ]);
     });
 
