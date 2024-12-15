@@ -5,13 +5,14 @@ const MyComponent = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/data`);
-      const data = await response.json();
-      setData(data); // Save the fetched data to state
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/data`);
+        const data = await response.json();
+        console.log(data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
     }
-  };
+};
+
 
   useEffect(() => {
     fetchData();
