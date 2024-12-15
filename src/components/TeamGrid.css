@@ -1,0 +1,106 @@
+/* Section Styling */
+.team-grid-section {
+    padding: 80px 20px;
+    background-image: url('../images/servicesbg.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.team-grid-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(252, 252, 252, 0.93); /* Semi-transparent white overlay */
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2; /* Ensures the container is above the overlay */
+
+}
+
+.team-grid-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #3C3D37;
+    margin-bottom: 40px;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: underline rgba(88, 88, 88, 0.2) 2px;
+    text-underline-offset: 15px;
+}
+
+/* Grid Layout */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: stretch;
+    background-color: #f7f6f6;
+    padding:10px;
+}
+
+/* Card Styling */
+.team-grid-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 300px;
+}
+
+.team-grid-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Styling */
+.team-grid-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.team-grid-description {
+    font-size: 0.9rem;
+    color: #777777;
+    line-height: 1.5;
+    text-align: justify;
+    padding: 10px;
+}
+
+/* Text Styling */
+.team-grid-info {
+    text-align: center;
+}
+
+.team-grid-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.team-grid-role {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555555;
+    margin-bottom: 10px;
+}
+
+.team-grid-description {
+    font-size: 0.9rem;
+    color: #777777;
+    line-height: 1.5;
+}

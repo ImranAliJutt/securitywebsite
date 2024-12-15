@@ -1,0 +1,143 @@
+/* Services Section */
+.services-sec {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px;
+    color: white;
+}
+
+.services-sec-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95); /* Overlay color */
+    z-index: 1;
+}
+
+.services-sec-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Title Animation */
+.services-sec-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color:#3C3D37;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Initial position */
+    transition: opacity 0.6s ease, transform 0.6s ease; /* Smooth fade-in and slide-up */
+}
+
+.services-sec-title.visible {
+    opacity: 1; /* Make visible */
+    transform: translateY(0); /* Reset position */
+}
+
+/* Description Animation */
+.services-sec-description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #3C3D37;/* Change color to black */
+    margin-bottom: 40px;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Initial position */
+    transition: opacity 0.6s ease, transform 0.6s ease; /* Smooth fade-in and slide-up */
+    transition-delay: 0.2s; /* Slight delay for sequential animation */
+}
+
+.services-sec-description.visible {
+    opacity: 1; /* Make visible */
+    transform: translateY(0); /* Reset position */
+}
+
+/* Grid Layout */
+.services-sec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Card Animation */
+.services-sec-card {
+    font-family: 'Poppins', sans-serif;
+    background:#000000;
+    position: relative;
+    border-radius: 0px;
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Initial position for animation */
+    transition: opacity 0.6s ease, transform 0.6s ease; /* Smooth fade-in and slide-up */
+    z-index: 2;
+}
+
+.services-sec-card.visible {
+    opacity: 1; /* Make card visible */
+    transform: translateY(0); /* Reset position */
+}
+
+.services-sec-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Card Background Overlay */
+.services-sec-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/cardbg.jpg'); /* Image overlay */
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Set the image opacity */
+    z-index: 0;
+    border-radius: 10px;
+}
+
+/* Card Icon Styling */
+.services-sec-icon {
+    font-size: 3rem; /* Adjust icon size */
+    color: linear-gradient(45deg, rgb(112, 89, 251), rgb(46, 207, 246), rgb(172, 80, 239));
+    margin: 0 auto; /* Center horizontally */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 80px; /* Adjust as needed */
+    width: 80px; /* Adjust as needed */
+    background:#3C3D37;
+    border-radius: 50%; /* Circular background */
+    margin-bottom: 20px; /* Spacing below the icon */
+}
+
+/* Card Title Styling */
+.services-sec-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: white;
+    position: relative;
+    z-index: 1; /* Place above overlay */
+}
+
+/* Card Description Styling */
+.services-sec-card-description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 1; /* Place above overlay */
+}

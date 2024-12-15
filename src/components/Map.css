@@ -1,0 +1,71 @@
+/* Main map section */
+.map-section {
+  width: 100%;
+  height: 60vh; /* Adjusted height for better proportions */
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Full-width responsive iframe */
+.map-iframe {
+  width: 100%;
+  height: 100%;
+  border: none; /* Remove iframe border */
+}
+
+/* Markers for offices */
+.office-marker {
+  position: absolute;
+  width: 150px; /* Marker container size */
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transform: translate(-50%, -50%); /* Center the marker */
+  z-index: 2; /* Ensure markers appear above the map */
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Marker Positions */
+.marker-london {
+  top: 40%; /* Adjust position for London */
+  left: 50%; /* Adjust based on map center */
+}
+
+.marker-manchester {
+  top: 50%; /* Adjust position for Manchester */
+  left: 30%; /* Adjust based on map center */
+}
+
+.marker-birmingham {
+  top: 60%; /* Adjust position for Birmingham */
+  left: 40%; /* Adjust based on map center */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .map-section {
+      height: 50vh; /* Adjust map height for smaller screens */
+  }
+
+  .office-marker {
+      font-size: 0.8rem;
+      width: 120px; /* Reduce marker size */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .map-section {
+      height: 40vh; /* Further adjust height for very small screens */
+  }
+
+  .office-marker {
+      font-size: 0.7rem;
+      width: 100px; /* Further reduce marker size */
+  }
+}

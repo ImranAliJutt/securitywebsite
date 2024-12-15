@@ -1,0 +1,123 @@
+.contact-section {
+    background: #000000; /* Light background for the entire section */
+    padding: 120px 20px;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff; /* Default text color */
+}
+
+.contact-info h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+    margin-top: 50px;
+}
+
+.contact-info p {
+    margin-bottom: 30px;
+    line-height: 1.6;
+    text-align: justify;
+    max-width: 550px;
+}
+
+.contact-details {
+    margin-top: 20px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.detail-item i {
+    font-size: 1.5rem;
+    color: #697565;
+    margin-right: 15px;
+}
+
+.detail-item h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #0a0a0a;
+}
+
+.detail-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    
+}
+.contact-form {
+    background: #ffffff; /* Dark background for the form */
+    padding: 40px;
+    border-radius: 0px;
+}
+
+.contact-form h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+form .form-group {
+    margin-bottom: 20px;
+}
+
+form .form-row {
+    display: flex;
+    gap: 15px;
+}
+
+form .form-row .form-group {
+    flex: 1;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #000000;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+form textarea {
+    resize: none;
+}
+
+.send-btn {
+    padding: 10px 30px;
+    text-decoration: none;
+    background: #697565;
+    background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 1) 34%, rgba(255, 255, 255, 1) 100%);
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    transition: background 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.send-btn:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .contact-info,
+    .contact-form {
+        margin-bottom: 30px;
+    }
+}

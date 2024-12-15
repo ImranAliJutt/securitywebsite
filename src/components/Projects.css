@@ -1,0 +1,157 @@
+/* Projects Section */
+.projects-section {
+    position: relative;
+    padding: 120px 20px;
+    background: url('../images/servicesbg.jpg') no-repeat center center/cover;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 150px;
+  }
+  
+  .projects-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    z-index: 1;
+    
+  }
+  
+  .projects-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .projects-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: rgb(255, 255, 255);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .projects-description {
+    font-size: 1.2rem;
+    color: rgb(255, 255, 255);
+    margin-bottom: 40px;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .project-card {
+    background: white;
+    border-radius: 0px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .project-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .project-details {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .project-title {
+    font-size: 1.5rem;
+    color: #3C3D37;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .project-description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .project-link {
+    font-size: 1rem;
+    color: #3C3D37;
+    opacity: 0.8;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .project-link:hover {
+    color: #ECDFCC;
+  }
+  
+  /* How We Work Section */
+  .how-we-work-section {
+    position: relative;
+    padding: 60px 20px;
+    background: url('../images/servicesbg.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+  }
+  
+  .how-we-work-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.93);
+    z-index: 1;
+  }
+  
+  .how-we-work-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .how-we-work-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .accordion {
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .accordion-item {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .accordion-button {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .accordion-body {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  

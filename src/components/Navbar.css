@@ -1,0 +1,110 @@
+/* Font Import */ 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Base Navbar Styling */
+.navbar {
+    font-family: 'Poppins', sans-serif;
+    padding: 1rem 2rem;
+    background: transparent;
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Navbar when Scrolled */
+.navbar.scrolled {
+    background: rgb(255, 255, 255);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1); 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Change Logo Text When Scrolled */
+.navbar.scrolled .navbar-brand {
+    color: black !important; /* Black color for logo text */
+}
+
+/* Navbar Brand Styling */
+.navbar-brand {
+    color: white !important; /* Default white color for logo text */
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center; /* Align logo and text vertically */
+}
+
+.navbar-brand img {
+    max-height: 50px; /* Set maximum height for the logo */
+    margin-right: 10px; /* Add space between the logo and text */
+    display: inline-block;
+    vertical-align: middle; /* Align with text */
+    border-radius: 30px;
+}
+
+/* Navbar Links */
+.nav-link {
+    color: white !important; /* Default white color for links */
+    font-weight: 400;
+    margin: 20px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar.scrolled .nav-link {
+    color: black !important; /* Black color for links when scrolled */
+}
+
+.nav-link:hover {
+    color: #ECDFCC !important; /* Gold on hover */
+}
+
+/* Navbar Toggle Icon for Small Screens */
+.navbar-toggler {
+    background-color: #697565;
+      font-family: Poppins, sans-serif;
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=UTF8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="rgba(255, 255, 255, 1)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+}
+
+/* Contact Button */
+.A-0 {
+    padding: 10px 30px;
+    text-decoration: none;
+    background: #3C3D37;
+    background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 1) 34%, rgba(255, 255, 255, 1) 100%);
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    transition: background 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.navbar.scrolled .A-0 {
+    background: #697565;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.A-0:hover {
+    background: #697565;
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        background: rgb(255, 255, 255);
+        background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 240, 1) 34%, rgba(255, 255, 255, 1) 100%);
+        background: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 240, 1) 34%, rgba(255, 255, 255, 1) 100%);
+        background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 240, 1) 34%, rgba(255, 255, 255, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1); 
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+     .navbar-brand {
+        color: black !important; /* Black color for logo text */
+    }
+    .nav-link {
+        color: black !important; /* Black color for links when scrolled */
+    }
+    
+}
