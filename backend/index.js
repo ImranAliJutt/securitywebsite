@@ -13,6 +13,17 @@ app.get("/", (req, res) => {
   res.send("Backend is running!");
 });
 
+app.get("/api/data", (req, res) => {
+    res.json([
+        { id: 1, name: "Alice", role: "developer" },
+        { id: 2, name: "Bob", role: "designer" },
+        { id: 3, name: "Charlie", role: "manager" },
+    ]);
+    });
+
+    
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

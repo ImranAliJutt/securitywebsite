@@ -10,19 +10,12 @@ import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Map from './components/Map';
 import TeamGrid from './components/TeamGrid';
+import MyComponent from './components/MyComponent';
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
-        <Header />
-        <Services />
-        <ContactUs />
-        <AboutUs />
-        <Projects />
-        <TeamGrid />
-        <Map />
-        <Footer />
+        
         <Routes>
           <Route path="/services" element={<Services />} />
           <Route path="/about-us" element={<AboutUs />} />
@@ -31,6 +24,7 @@ function App() {
           <Route path="footer" element={<Footer />} />
           <Route path="map" element={<Map />} />
           <Route path="team" element={<TeamGrid />} />
+          <Route path="my-component" element={<MyComponent />} />
         </Routes>
       </div>
     </Router>
