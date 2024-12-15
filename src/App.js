@@ -11,11 +11,13 @@ import Footer from './components/Footer';
 import Map from './components/Map';
 import TeamGrid from './components/TeamGrid';
 import MyComponent from './components/MyComponent';
+import DataComponent from './components/DataComponent';
 function App() {
   return (
     <Router>
       <div className="App">
-        
+      <h1>Welcome to Security Website</h1>
+      <DataComponent />
         <Routes>
           <Route path="/services" element={<Services />} />
           <Route path="/about-us" element={<AboutUs />} />
