@@ -5,19 +5,22 @@ require("dotenv").config();
 
 const app = express();
 
-
 // Middleware
 app.use(cors({
   origin: [
-      "http://localhost:3000",            // Local frontend
-      "https://securitywebsite.onrender.com/" // Deployed frontend URL
+    "http://localhost:3000",             // Local frontend
+    "https://securitywebsite.onrender.com" // Deployed frontend URL
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-  allowedHeaders: ["Content-Type", "Authorization"] // Allowed headers
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Ensure OPTIONS is allowed
+  allowedHeaders: ["Content-Type", "Authorization"]     // Allow headers for JSON
 }));
 
+app.use(express.json()); // Parse JSON requests
 
-app.use(express.json());
+// Test Route to Confirm CORS
+app.options("/api/contact", (req, res) => {
+  res.status(200).send("Preflight successful");
+});
 
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -27,40 +30,15 @@ mongoose
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// Mongoose Schema for Contact Form
-const contactSchema = new mongoose.Schema({
-  fullName: { type: String, required: true },
-  email: { type: String, required: true },
-  phone: String,
-  subject: { type: String, required: true },
-  message: { type: String, required: true },
-});
-
-const Contact = mongoose.model("Contact", contactSchema);
-
-// Routes
-const PORT = process.env.PORT || 5000;
-
-// Default Route
-app.get("/", (req, res) => {
-  res.send("Backend is running!");
-});
-
-// GET Data Route
-app.get("/api/data", (req, res) => {
-  res.json([
-    { id: 1, name: "Alice", role: "developer" },
-    { id: 2, name: "Bob", role: "designer" },
-    { id: 3, name: "Imran Ranjha", role: "manager" },
-  ]);
-});
-
-// POST Contact Form Data Route
+// POST Route for Contact Form
 app.post("/api/contact", async (req, res) => {
   try {
     const { fullName, email, phone, subject, message } = req.body;
 
-    // Create a new contact instance
+    if (!fullName || !email || !subject || !message) {
+      return res.status(400).json({ message: "All required fields must be filled" });
+    }
+
     const newContact = new Contact({
       fullName,
       email,
@@ -69,91 +47,16 @@ app.post("/api/contact", async (req, res) => {
       message,
     });
 
-    // Save to MongoDB
     await newContact.save();
-
     res.status(201).json({ message: "Contact saved successfully" });
   } catch (error) {
     console.error("Error saving contact:", error.message);
-    res.status(500).json({ message: "Error saving contact" });
+    res.status(500).json({ message: "Error saving contact", error: error.message });
   }
 });
-
-// Admin Login (pre-generated credentials)
-const adminCredentials = {
-  username: "admin",
-  password: "12345",
-};
-
-// Admin Login Route
-app.post("/api/admin/login", (req, res) => {
-  const { username, password } = req.body;
-  if (
-      username === adminCredentials.username &&
-      password === adminCredentials.password
-  ) {
-      res.status(200).json({ message: "Login successful" });
-  } else {
-      res.status(401).json({ message: "Invalid credentials" });
-  }
-});
-
-// Fetch All Records Route
-app.get("/api/admin/records", async (req, res) => {
-  try {
-      const records = await Contact.find();
-      res.status(200).json(records);
-  } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Error fetching records" });
-  }
-});
-
-// fetchContacts(); // Fetch contact data on successful login
-app.get("/api/contacts", async (req, res) => {
-  try {
-    const contacts = await Contact.find();
-    res.status(200).json(contacts);
-  } catch (error) {
-    console.error("Error fetching data:", error); // Log full error details
-    res.status(500).json({ message: "Error fetching data", error: error.message });
-  }
-});
-
-
-// 3. Add a new contact record
-app.post("/api/contacts", async (req, res) => {
-  try {
-    const newContact = new Contact(req.body);
-    await newContact.save();
-    res.status(201).json({ message: "Contact added successfully", newContact });
-  } catch (error) {
-    res.status(500).json({ message: "Error saving contact", error });
-  }
-}); 
- 
-// 4. Delete a contact record
-app.delete("/api/contacts/:id", async (req, res) => {
-  try {
-    await Contact.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Contact deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: "Error deleting contact", error });
-  }
-});
-
-// 5. Update a contact record
-app.put("/api/contacts/:id", async (req, res) => {
-  try {
-    const updatedContact = await Contact.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json({ message: "Contact updated successfully", updatedContact });
-  } catch (error) {
-    res.status(500).json({ message: "Error updating contact", error });
-  }
-});
-
 
 // Start Server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

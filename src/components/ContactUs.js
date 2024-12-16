@@ -21,33 +21,33 @@ const ContactUs = () => {
         e.preventDefault();
         setStatusMessage(''); // Reset the status message
         try {
-            const response = await fetch(
-                `${process.env.REACT_APP_BACKEND_URL}/api/contact`, // Use environment variable here
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                }
-            );
-    
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Success:', data);
-                setStatusMessage('Message sent successfully!');
-                setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' });
-            } else {
-                const errorData = await response.json();
-                console.error('Error:', errorData);
-                setStatusMessage('Error saving contact');
+          const response = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/api/contact`, // Use environment variable
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
             }
+          );
+      
+          if (response.ok) {
+            const data = await response.json();
+            console.log('Success:', data);
+            setStatusMessage('Message sent successfully!');
+            setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' });
+          } else {
+            const errorData = await response.json();
+            console.error('Error:', errorData);
+            setStatusMessage('Error saving contact');
+          }
         } catch (error) {
-            console.error('Error submitting form:', error.message);
-            setStatusMessage('Error connecting to server');
+          console.error('Error submitting form:', error.message);
+          setStatusMessage('Error connecting to server');
         }
-    };
-    
+      };
+      
 
     return (
         <section className="contact-section">
