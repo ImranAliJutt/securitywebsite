@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -24,7 +25,7 @@ const Footer = () => {
               <a href="#">Projects</a>
             </li>
             <li>
-              <a href="#">Contact Us</a>
+              <Link to="/admin">admin</Link>
             </li>
           </ul>
           <div className="footer-social-icons">

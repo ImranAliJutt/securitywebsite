@@ -33,8 +33,7 @@ function App() {
                 <TeamGrid />
                 <Map />
                 <Footer />
-                <h1>Welcome to Security Website</h1>
-                <DataComponent />
+                
               </>
             }
           />
