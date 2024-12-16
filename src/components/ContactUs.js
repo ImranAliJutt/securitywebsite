@@ -22,7 +22,7 @@ const ContactUs = () => {
         setStatusMessage(''); // Reset the status message
         try {
           const response = await fetch(
-            `${process.env.REACT_APP_BACKEND_URL}/api/contact`, // Use environment variable
+            "https://securitywebsitebackend.onrender.com/api/contact", // Hardcode temporarily for testing
             {
               method: 'POST',
               headers: {
