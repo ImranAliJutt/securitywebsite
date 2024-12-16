@@ -21,14 +21,17 @@ const ContactUs = () => {
         e.preventDefault();
         setStatusMessage(''); // Reset the status message
         try {
-            const response = await fetch('http://localhost:5000/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
+            const response = await fetch(
+                `${process.env.REACT_APP_BACKEND_URL}/api/contact`, // Use environment variable here
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                }
+            );
+    
             if (response.ok) {
                 const data = await response.json();
                 console.log('Success:', data);
@@ -44,6 +47,7 @@ const ContactUs = () => {
             setStatusMessage('Error connecting to server');
         }
     };
+    
 
     return (
         <section className="contact-section">
