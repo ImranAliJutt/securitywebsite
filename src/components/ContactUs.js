@@ -1,89 +1,94 @@
-import React from 'react';
-import './ContactUs.css';
+import React, { useState } from "react";
+import "./ContactUs.css";
 
 const ContactUs = () => {
-    return (
-        <section className="contact-section">
-            <div className="container">
-                <div className="row">
-                    {/* Left Column - Contact Information */}
-                    <div className="col-md-6 contact-info">
-                        <h2>GET IN TOUCH</h2>
-                        <p>
-    We're always on the lookout to collaborate with new clients and partners. Whether you need expert security solutions, customized services, or have a unique project in mind, our team is ready to assist. If you're interested in working with us, please get in touch through one of the following ways.
-</p>
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    subject: "",
+    message: "",
+  });
 
-                        <div className="contact-details">
-                            <div className="detail-item">
-                                <i className="fa-solid fa-location-dot"></i>
-                                <div>
-                                    <h4>Address</h4>
-                                    <p>8014 Edith Blvd NE, Albuquerque, New York, United States</p>
-                                </div>
-                            </div>
-                            <div className="detail-item-row">
-                                <div className="detail-item">
-                                    <i className="fa-solid fa-phone"></i>
-                                    <div>
-                                        <h4>Phone</h4>
-                                        <p>(505) 792-2430</p>
-                                    </div>
-                                </div>
-                                <div className="detail-item">
-                                    <i className="fa-solid fa-envelope"></i>
-                                    <div>
-                                        <h4>Email</h4>
-                                        <p>demo@yourdomain.com</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="detail-item">
-                                <i className="fa-solid fa-clock"></i>
-                                <div>
-                                    <h4>Opening Hours</h4>
-                                    <p>
-                                        <strong>Mon - Fri:</strong> 9am - 5pm <br />
-                                        <strong>Sat - Sun:</strong> 9am - 2pm
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-                    </div>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+      if (response.ok) {
+        alert("Form submitted successfully!");
+        setFormData({
+          fullName: "",
+          email: "",
+          phoneNumber: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert("Failed to submit form");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
 
-                    {/* Right Column - Contact Form */}
-                    <div className="col-md-6 contact-form">
-                        <h2>CONTACT US</h2>
-                        <form>
-                            <div className="form-group">
-                                <label>Full Name *</label>
-                                <input type="text" placeholder="Enter your name" required />
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col">
-                                    <label>Email *</label>
-                                    <input type="email" placeholder="Enter your email" required />
-                                </div>
-                                <div className="form-group col">
-                                    <label>Phone Number</label>
-                                    <input type="tel" placeholder="Enter your phone number" />
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label>Subject *</label>
-                                <input type="text" placeholder="Enter subject" required />
-                            </div>
-                            <div className="form-group">
-                                <label>Message *</label>
-                                <textarea placeholder="Enter your message" rows="4" required></textarea>
-                            </div>
-                            <button type="submit" className="send-btn">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <section className="contact-section">
+      <h2>Contact Us</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Full Name"
+          value={formData.fullName}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="tel"
+          name="phoneNumber"
+          placeholder="Phone Number"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="subject"
+          placeholder="Subject"
+          value={formData.subject}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Message"
+          value={formData.message}
+          onChange={handleChange}
+          rows="4"
+          required
+        />
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  );
 };
 
 export default ContactUs;
