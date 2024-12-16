@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from React Router
 import './Navbar.css';
 import logo from '../images/logo.png';
 
@@ -21,10 +22,10 @@ const Navbar = () => {
             }`}
         >
             <div className="container">
-                <a className="navbar-brand" href="#">
+                <Link className="navbar-brand" to="/">
                     <img src={logo} alt="BritGuarding" />
                     BritGuarding
-                </a>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -39,29 +40,25 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto align-items-center">
                         <li className="nav-item">
-                            <a className="nav-link" href="#home">
+                            <Link className="nav-link" to="/">
                                 Home
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#about">
+                            <Link className="nav-link" to="/about-us">
                                 About Us
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#about">
-                                Join us
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#services">
+                            <Link className="nav-link" to="/services">
                                 Services
-                            </a>
+                            </Link>
                         </li>
-                        
                     </ul>
                     <div className="contact-button-container">
-                        <a href="/contact-us" className="A-0">Contact Us</a>
+                        <Link to="/contact-us" className="A-0">
+                            Contact Us
+                        </Link>
                     </div>
                 </div>
             </div>

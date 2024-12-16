@@ -109,6 +109,19 @@ form textarea {
     background: #ffffff;
     color: #000000;
 }
+/* ContactUs.css */
+
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
