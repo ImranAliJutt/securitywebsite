@@ -2,8 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
-
-const Contact = require("./models/Contact"); // Verify this import path
+const Contact = require("./models/Contact");
 
 const app = express();
 
@@ -11,7 +10,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://securitywebsite.onrender.com"
+    "https://securitywebsitebackend.onrender.com/"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
@@ -21,6 +20,8 @@ app.use(express.json());
 
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
+
+
 
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
