@@ -1,94 +1,160 @@
-import React, { useState } from "react";
-import "./ContactUs.css";
+import React, { useState } from 'react';
+import './ContactUs.css';
 
 const ContactUs = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phoneNumber: "",
-    subject: "",
-    message: "",
-  });
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+    });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const [statusMessage, setStatusMessage] = useState(''); // For success/error messages
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/contact`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatusMessage(''); // Reset the status message
+        try {
+            const response = await fetch('http://localhost:5000/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Success:', data);
+                setStatusMessage('Message sent successfully!');
+                setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' });
+            } else {
+                const errorData = await response.json();
+                console.error('Error:', errorData);
+                setStatusMessage('Error saving contact');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error.message);
+            setStatusMessage('Error connecting to server');
         }
-      );
-      if (response.ok) {
-        alert("Form submitted successfully!");
-        setFormData({
-          fullName: "",
-          email: "",
-          phoneNumber: "",
-          subject: "",
-          message: "",
-        });
-      } else {
-        alert("Failed to submit form");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
+    };
 
-  return (
-    <section className="contact-section">
-      <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Full Name"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="tel"
-          name="phoneNumber"
-          placeholder="Phone Number"
-          value={formData.phoneNumber}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="subject"
-          placeholder="Subject"
-          value={formData.subject}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="message"
-          placeholder="Message"
-          value={formData.message}
-          onChange={handleChange}
-          rows="4"
-          required
-        />
-        <button type="submit">Send Message</button>
-      </form>
-    </section>
-  );
+    return (
+        <section className="contact-section">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6 contact-info">
+                        <h2>GET IN TOUCH</h2>
+                        <p>
+                            We're always on the lookout to collaborate with new clients and partners. If you're interested in working with us, please get in touch.
+                        </p>
+                        <div className="contact-details">
+                            <div className="detail-item">
+                                <i className="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <h4>Address</h4>
+                                    <p>8014 Edith Blvd NE, Albuquerque, New York, United States</p>
+                                </div>
+                            </div>
+                            <div className="detail-item-row">
+                                <div className="detail-item">
+                                    <i className="fa-solid fa-phone"></i>
+                                    <div>
+                                        <h4>Phone</h4>
+                                        <p>(505) 792-2430</p>
+                                    </div>
+                                </div>
+                                <div className="detail-item">
+                                    <i className="fa-solid fa-envelope"></i>
+                                    <div>
+                                        <h4>Email</h4>
+                                        <p>demo@yourdomain.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-6 contact-form">
+                        <h2>CONTACT US</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label>Full Name *</label>
+                                <input
+                                    type="text"
+                                    name="fullName"
+                                    placeholder="Enter your name"
+                                    value={formData.fullName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col">
+                                    <label>Email *</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Enter your email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group col">
+                                    <label>Phone Number</label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        placeholder="Enter your phone number"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label>Subject *</label>
+                                <input
+                                    type="text"
+                                    name="subject"
+                                    placeholder="Enter subject"
+                                    value={formData.subject}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Message *</label>
+                                <textarea
+                                    name="message"
+                                    placeholder="Enter your message"
+                                    rows="4"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    required
+                                ></textarea>
+                            </div>
+                            <button type="submit" className="send-btn">
+                                Send Message
+                            </button>
+                        </form>
+                        {/* Success or Error Message */}
+                        {statusMessage && (
+                            <p className={statusMessage.includes('Error') ? 'error-message' : 'success-message'}>
+                                {statusMessage}
+                            </p>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 };
 
 export default ContactUs;

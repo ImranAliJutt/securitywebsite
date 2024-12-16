@@ -1,7 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config(); // Load environment variables from .env file
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
 
@@ -9,70 +9,67 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Load environment variables
-const PORT = process.env.PORT || 5000;
+// MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// MongoDB Connection
 mongoose
-  .connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB successfully");
-  })
-  .catch((error) => {
-    console.error("MongoDB connection error:", error.message);
-  });
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-// Define a Schema and Model for the Contact Form
+// Mongoose Schema for Contact Form
 const contactSchema = new mongoose.Schema({
-  fullName: String,
-  email: String,
-  phoneNumber: String,
-  subject: String,
-  message: String,
+  fullName: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: String,
+  subject: { type: String, required: true },
+  message: { type: String, required: true },
 });
 
 const Contact = mongoose.model("Contact", contactSchema);
+
+// Routes
+const PORT = process.env.PORT || 5000;
 
 // Default Route
 app.get("/", (req, res) => {
   res.send("Backend is running!");
 });
 
-// Route to Fetch Data from MongoDB (GET)
-app.get("/api/data", async (req, res) => {
-  try {
-    const contacts = await Contact.find();
-    res.json(contacts);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching data" });
-  }
+// GET Data Route
+app.get("/api/data", (req, res) => {
+  res.json([
+    { id: 1, name: "Alice", role: "developer" },
+    { id: 2, name: "Bob", role: "designer" },
+    { id: 3, name: "Imran Ranjha", role: "manager" },
+  ]);
 });
 
-// Route to Submit Contact Form (POST)
+// POST Contact Form Data Route
 app.post("/api/contact", async (req, res) => {
   try {
-    const { fullName, email, phoneNumber, subject, message } = req.body;
+    const { fullName, email, phone, subject, message } = req.body;
 
+    // Create a new contact instance
     const newContact = new Contact({
       fullName,
       email,
-      phoneNumber,
+      phone,
       subject,
       message,
     });
 
+    // Save to MongoDB
     await newContact.save();
+
     res.status(201).json({ message: "Contact saved successfully" });
   } catch (error) {
+    console.error("Error saving contact:", error.message);
     res.status(500).json({ message: "Error saving contact" });
   }
 });
 
-// Start the Server
+// Start Server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
