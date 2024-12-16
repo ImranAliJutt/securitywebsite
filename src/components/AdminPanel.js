@@ -28,7 +28,7 @@ const AdminPanel = () => {
   // Fetch Contacts
   const fetchContacts = async () => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts`);
+        const response = await fetch('http://localhost:5000/api/contacts');
         if (response.ok) {
         const data = await response.json();
         setContacts(data);
@@ -39,16 +39,18 @@ const AdminPanel = () => {
   };
 
   // Delete Contact
-  const handleDelete = async (id) => {
+    const handleDelete = async (id) => {    
     try {
-      await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${id}`, {
-        method: "DELETE",
-      });
-      setContacts(contacts.filter((contact) => contact._id !== id));
+
+        await fetch(`http://localhost:5000/api/contacts/${id}`, {
+            method: 'DELETE',
+        });
+        fetchContacts();
     } catch (error) {
-      console.error("Error deleting contact:", error);
+        console.error('Error deleting contact:', error);
     }
-  };
+};
+
 
   // Start Editing Contact
   const handleEdit = (contact) => {
@@ -59,7 +61,7 @@ const AdminPanel = () => {
   // Update Contact
   const handleUpdate = async (id) => {
     try {
-      await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${id}`, {
+      await fetch(`http://localhost:5000/api/contacts/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedContact),
