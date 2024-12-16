@@ -1,0 +1,73 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Background and Main Container */
+  .admin-panel-container {
+    background-color: #181C14;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Login Card Styling */
+  .login-card {
+    background: #2c2f26;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .login-card h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    background-color: #444;
+    border: none;
+    color: white;
+  }
+  
+  .form-control::placeholder {
+    color: #aaa;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  
+  /* Success/Error Messages */
+  .message {
+    color: #ff6b6b;
+  }
+  
+  .message.success {
+    color: #28a745;
+  }
+  
+  /* Data Table Container */
+  .data-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  

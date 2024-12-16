@@ -12,6 +12,7 @@ import Map from './components/Map';
 import TeamGrid from './components/TeamGrid';
 import MyComponent from './components/MyComponent';
 import DataComponent from './components/DataComponent';
+import AdminPanel from './components/AdminPanel'; // Import Admin Panel Component
 
 function App() {
   return (
@@ -74,7 +75,7 @@ function App() {
             }
           />
 
-          {/* Other Routes */}
+          {/* Projects Route - Navbar + Projects + Footer */}
           <Route
             path="/projects"
             element={
@@ -86,6 +87,7 @@ function App() {
             }
           />
 
+          {/* Map Route - Navbar + Map + Footer */}
           <Route
             path="/map"
             element={
@@ -97,6 +99,7 @@ function App() {
             }
           />
 
+          {/* Team Route - Navbar + TeamGrid + Footer */}
           <Route
             path="/team"
             element={
@@ -108,12 +111,25 @@ function App() {
             }
           />
 
+          {/* My Component Route */}
           <Route
             path="/my-component"
             element={
               <>
                 <Navbar />
                 <MyComponent />
+                <Footer />
+              </>
+            }
+          />
+
+          {/* Admin Panel Route */}
+          <Route
+            path="/admin"
+            element={
+              <>
+                <Navbar />
+                <AdminPanel />
                 <Footer />
               </>
             }
