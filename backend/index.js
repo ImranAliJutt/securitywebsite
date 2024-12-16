@@ -99,15 +99,17 @@ app.get("/api/admin/records", async (req, res) => {
   }
 });
 
-// 2. Fetch all contact records
+// fetchContacts(); // Fetch contact data on successful login
 app.get("/api/contacts", async (req, res) => {
   try {
     const contacts = await Contact.find();
     res.status(200).json(contacts);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching data", error });
+    console.error("Error fetching data:", error); // Log full error details
+    res.status(500).json({ message: "Error fetching data", error: error.message });
   }
 });
+
 
 // 3. Add a new contact record
 app.post("/api/contacts", async (req, res) => {

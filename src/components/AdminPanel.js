@@ -28,8 +28,8 @@ const AdminPanel = () => {
   // Fetch Contacts
   const fetchContacts = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/contacts`);
-      if (response.ok) {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts`);
+        if (response.ok) {
         const data = await response.json();
         setContacts(data);
       }
@@ -41,7 +41,7 @@ const AdminPanel = () => {
   // Delete Contact
   const handleDelete = async (id) => {
     try {
-      await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/contacts/${id}`, {
+      await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${id}`, {
         method: "DELETE",
       });
       setContacts(contacts.filter((contact) => contact._id !== id));
@@ -59,7 +59,7 @@ const AdminPanel = () => {
   // Update Contact
   const handleUpdate = async (id) => {
     try {
-      await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/contacts/${id}`, {
+      await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedContact),
