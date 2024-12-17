@@ -24,33 +24,38 @@ const AdminPanel = () => {
       setIsLoggedIn(false);
     }
   };
+        // Fetch Contacts
+        const fetchContacts = async () => {
+          try {
+            const response = await fetch(
+              "https://securitywebsitebackend.onrender.com/api/contacts"
+            );
+            if (!response.ok) {
+              throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+            const data = await response.json();
+            console.log("Fetched contacts:", data); // Debugging log
+            setContacts(data);
+          } catch (error) {
+            console.error("Error fetching contacts:", error.message);
+          }
+        };
 
-  // Fetch Contacts
-  const fetchContacts = async () => {
-    try {
-        const response = await fetch('http://localhost:5000/api/contacts');
-        if (response.ok) {
-        const data = await response.json();
-        setContacts(data);
-      }
-    } catch (error) {
-      console.error("Error fetching contacts:", error);
-    }
-  };
 
   // Delete Contact
-    const handleDelete = async (id) => {    
+  const handleDelete = async (id) => {
     try {
-
-        await fetch(`http://localhost:5000/api/contacts/${id}`, {
-            method: 'DELETE',
-        });
-        fetchContacts();
+      await fetch(
+        `https://securitywebsitebackend.onrender.com/api/contacts/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      fetchContacts();
     } catch (error) {
-        console.error('Error deleting contact:', error);
+      console.error("Error deleting contact:", error.message);
     }
-};
-
+  };
 
   // Start Editing Contact
   const handleEdit = (contact) => {
@@ -61,15 +66,18 @@ const AdminPanel = () => {
   // Update Contact
   const handleUpdate = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/contacts/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedContact),
-      });
+      await fetch(
+        `https://securitywebsitebackend.onrender.com/api/contacts/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedContact),
+        }
+      );
       setEditingContact(null);
       fetchContacts();
     } catch (error) {
-      console.error("Error updating contact:", error);
+      console.error("Error updating contact:", error.message);
     }
   };
 
@@ -135,7 +143,10 @@ const AdminPanel = () => {
                         <input
                           value={updatedContact.fullName || ""}
                           onChange={(e) =>
-                            setUpdatedContact({ ...updatedContact, fullName: e.target.value })
+                            setUpdatedContact({
+                              ...updatedContact,
+                              fullName: e.target.value,
+                            })
                           }
                         />
                       </td>
@@ -143,7 +154,10 @@ const AdminPanel = () => {
                         <input
                           value={updatedContact.email || ""}
                           onChange={(e) =>
-                            setUpdatedContact({ ...updatedContact, email: e.target.value })
+                            setUpdatedContact({
+                              ...updatedContact,
+                              email: e.target.value,
+                            })
                           }
                         />
                       </td>
@@ -151,7 +165,10 @@ const AdminPanel = () => {
                         <input
                           value={updatedContact.phone || ""}
                           onChange={(e) =>
-                            setUpdatedContact({ ...updatedContact, phone: e.target.value })
+                            setUpdatedContact({
+                              ...updatedContact,
+                              phone: e.target.value,
+                            })
                           }
                         />
                       </td>

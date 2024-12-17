@@ -6,6 +6,15 @@ const Contact = require("./models/Contact");
 
 const app = express();
 
+// Middleware: Enable CORS for all routes
+app.use(cors({
+  origin: [
+    "http://localhost:3000",               // Local frontend
+    "https://securitywebsite.onrender.com" // Deployed frontend URL
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 // Middleware
 app.use(
   cors({
@@ -18,10 +27,15 @@ app.use(
   })
 );
 
+// Debugging CORS preflight
+app.options("*", cors()); // Allow OPTIONS method globally
+
+// Middleware to parse JSON requests
 app.use(express.json());
 
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
+mongoose.connect(MONGODB_URI)
 
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -33,26 +47,28 @@ app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
-// POST Route for Saving Contact
+
+// Route to fetch all contacts
+app.use("/api/contacts", require("./routes/contactRoutes"));
+
+
+
+// POST Route for Contact Submission
 app.post("/api/contact", async (req, res) => {
   try {
     const { fullName, email, phone, subject, message } = req.body;
 
+    // Validation
     if (!fullName || !email || !subject || !message) {
       return res
         .status(400)
         .json({ message: "All required fields must be filled" });
     }
 
-    const newContact = new Contact({
-      fullName,
-      email,
-      phone,
-      subject,
-      message,
-    });
-
+    // Save Contact
+    const newContact = new Contact({ fullName, email, phone, subject, message });
     await newContact.save();
+
     res.status(201).json({ message: "Contact saved successfully!" });
   } catch (error) {
     console.error("Error saving contact:", error.message);
@@ -62,6 +78,9 @@ app.post("/api/contact", async (req, res) => {
     });
   }
 });
+
+// Route to fetch all contacts
+app.use("/api/contacts", require("./routes/contactRoutes"));
 
 // Start Server
 const PORT = process.env.PORT || 5000;

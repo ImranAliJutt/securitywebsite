@@ -5,10 +5,11 @@ const Contact = require("../models/Contact");
 // Fetch all contacts
 router.get("/", async (req, res) => {
   try {
-    const contacts = await Contact.find();
+    const contacts = await Contact.find(); // Fetch all contact documents
     res.status(200).json(contacts);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching contacts", error });
+    console.error("Error fetching contacts:", error.message);
+    res.status(500).json({ message: "Error fetching contacts", error: error.message });
   }
 });
 
@@ -19,7 +20,8 @@ router.post("/", async (req, res) => {
     await newContact.save();
     res.status(201).json({ message: "Contact saved successfully", newContact });
   } catch (error) {
-    res.status(500).json({ message: "Error saving contact", error });
+    console.error("Error saving contact:", error.message);
+    res.status(500).json({ message: "Error saving contact", error: error.message });
   }
 });
 
@@ -29,7 +31,8 @@ router.delete("/:id", async (req, res) => {
     await Contact.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Contact deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Error deleting contact", error });
+    console.error("Error deleting contact:", error.message);
+    res.status(500).json({ message: "Error deleting contact", error: error.message });
   }
 });
 
@@ -39,7 +42,8 @@ router.put("/:id", async (req, res) => {
     const updatedContact = await Contact.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.status(200).json({ message: "Contact updated successfully", updatedContact });
   } catch (error) {
-    res.status(500).json({ message: "Error updating contact", error });
+    console.error("Error updating contact:", error.message);
+    res.status(500).json({ message: "Error updating contact", error: error.message });
   }
 });
 
