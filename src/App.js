@@ -13,6 +13,7 @@ import TeamGrid from './components/TeamGrid';
 import MyComponent from './components/MyComponent';
 import DataComponent from './components/DataComponent';
 import AdminPanel from './components/AdminPanel'; // Import Admin Panel Component
+import SecondNavbar from './components/SecondNavbar'; // Import SecondNavbar Component
 
 function App() {
   return (
@@ -115,7 +116,7 @@ function App() {
             path="/my-component"
             element={
               <>
-                <Navbar />
+                <SecondNavbar />
                 <MyComponent />
                 <Footer />
               </>
@@ -127,9 +128,9 @@ function App() {
             path="/admin"
             element={
               <>
-                <Navbar />
+                <SecondNavbar />
                 <AdminPanel />
-                <Footer />
+                
               </>
             }
           />
